@@ -1,0 +1,63 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Kunda-Brand-API",
+      "description": "API description in Markdown.",
+      "version": "1.0.0"
+    },
+    "host": "localhost:4000",
+    "basePath": "/api/v1",
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/login": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Login with email and password",
+          "description": "",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "email",
+              "in": "formData",
+              "description": "Email of the user",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "password",
+              "in": "formData",
+              "description": "Password of the user",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": ""
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "schema": {
+                "$ref": ""
+              }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "schema": {
+                "$ref": ""
+              }
+            }
+          }
+        }
+      }
+    } 
+}
