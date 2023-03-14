@@ -1,18 +1,18 @@
-import Book from "../models/Book.js";
+import Blog from "../models/Blog.js";
 import failureMsg from "../utils/failureMsg.js";
 import serverError from "../utils/serverError.js";
 import successMsg from "../utils/successMsg.js";
 
 
-class booksController{
-    //create a book
-    static async createBook(req, res){
+class blogsController{
+    //create a blog
+    static async createBlog(req, res){
         const { name, author, description, imageUrl} = req.body;
         try {
-            const newBook = await Book.create({name, description, author, imageUrl}) 
+            const newBlog = await Blog.create({name, description, author, imageUrl}) 
             const status = 201;
-            const msg = "Book created Successfully";
-            const data = newBook;
+            const msg = "Blog created Successfully";
+            const data = newBlog;
             successMsg(res, status, msg, data);
             
         } catch (error) {
@@ -21,13 +21,13 @@ class booksController{
         }
     }
 
-    // get all book
-    static async getBook(req, res){
+    // get all blog
+    static async getBlog(req, res){
         try {
-            const books = await Book.find() 
+            const blogs = await Blog.find() 
             const status = 201;
-            const msg = "All Books Created";
-            const data = books;
+            const msg = "All Blogs Created";
+            const data = blogs;
             successMsg(res, status, msg, data);
             
         } catch (error) {
@@ -35,19 +35,19 @@ class booksController{
             serverError(res, errorMsg); 
         } 
     }
-    // get one book
-    static async getoneBook(req, res){
+    // get one blog
+    static async getoneBlog(req, res){
         const { id } = req.params;
         try {
-            const book = await Book.findOne({_id : id}) 
-            if (!book){
+            const blog = await Blog.findOne({_id : id}) 
+            if (!blog){
                 const msg = `Id ${id} was not found`
                 const status = 404;
                 failureMsg(res, status, msg)
             }else{
                 const status = 200;
-            const msg = `getting one book by id: ${id} successfully fetched`;
-            const data = book;
+            const msg = `getting one blog by id: ${id} successfully fetched`;
+            const data = blog;
             successMsg(res, status, msg, data);
 
             }
@@ -59,15 +59,15 @@ class booksController{
         } 
     }
 
-    //update book
-static async updateBook(req, res){
+    //update blog
+static async updateBlog(req, res){
     const{ name, description, author, imageUrl } = req.body
     const { id } = req.params;
     const _id = id;
     try {
-        const updateBook = await Book.findByIdAndUpdate(_id, { name, description, author, imageUrl }, {new: true})
+        const updateBlog = await Blog.findByIdAndUpdate(_id, { name, description, author, imageUrl }, {new: true})
         res.status(200).json({
-            data: updateBook
+            data: updateBlog
         })
         
     } catch (error) {
@@ -75,12 +75,12 @@ static async updateBook(req, res){
             serverError(res, errorMsg); 
     }
 }
- //delete book
- static async deleteBook(req, res){
+ //delete blog
+ static async deleteBlog(req, res){
     const { id } = req.params;
     const _id = id;
     try {
-        await Book.findByIdAndDelete(_id)
+        await Blog.findByIdAndDelete(_id)
         res.status(200).json({
             message: "Deleted Successfully"
         })
@@ -92,4 +92,4 @@ static async updateBook(req, res){
 }
      
 }
-export default booksController;
+export default blogsController;

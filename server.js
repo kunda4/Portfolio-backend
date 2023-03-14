@@ -7,9 +7,13 @@ import mongoose from "mongoose";
 import routes from "./src/routes/allRoutes.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-import booksRoute from "./src/routes/booksRoute.js"
+import blogsRoute from "./src/routes/blogsRoute.js";
 import registerRoute from './src/routes/registerRoute.js';
 import loginRoute from "./src/routes/loginRoute.js";
+import cmntRoute from "./src/routes/cmntRoute.js";
+import querryRoute from "./src/routes/querryRoute.js";
+import portfolioRoute from "./src/routes/portfolioRoute.js"
+
 
 // configure dotenv
 
@@ -53,15 +57,21 @@ Promise.all([con(), startServer()])
 })
 app.use('/api/v1', loginRoute);
 app.use('/api/v1', registerRoute);
-app.use('/api/v1', booksRoute);
+app.use('/api/v1', blogsRoute);
+app.use ('/api/v1', cmntRoute);
+app.use ('/api/v1', querryRoute);
+app.use ('/api/v1', portfolioRoute);
+
+
 
 
 // Set up Swagger documentation
 import swaggerDefinition from './swagger.json' assert { type: "json" };
 const options = {
     swaggerDefinition,
-    apis: ['../routes/*.js'], // Path to the API routes files
+    apis: ['../routes/blogsRoutes/*.js'], // Path to the API routes files
 };
 const swaggerSpec = swaggerJSDoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
