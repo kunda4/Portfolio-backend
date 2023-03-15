@@ -8,9 +8,9 @@ const router = express.Router()
 // defined blogs route
 router.post('/portfolio', verifyisAdmin,  portfoliosController.createPortfolio )
 router.get('/portfolio', portfoliosController.getPortfolio)
-router.get('/portfolio/:id', portfoliosController.getonePortfolio)
-router.put('/portfolio/:id', verifyisAdmin,  portfoliosController.updatePortfolio)
-router.delete('/portfolio/:id', verifyisAdmin, portfoliosController.deletePortfolio)
+router.get('/portfolio-get/:id', portfoliosController.getonePortfolio)
+router.put('/portfolio-put/:id', verifyisAdmin,  portfoliosController.updatePortfolio)
+router.delete('/portfolio-delete/:id', verifyisAdmin, portfoliosController.deletePortfolio)
 
 
 export default router;

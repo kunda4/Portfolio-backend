@@ -12,7 +12,8 @@ import registerRoute from './src/routes/registerRoute.js';
 import loginRoute from "./src/routes/loginRoute.js";
 import cmntRoute from "./src/routes/cmntRoute.js";
 import querryRoute from "./src/routes/querryRoute.js";
-import portfolioRoute from "./src/routes/portfolioRoute.js"
+import portfolioRoute from "./src/routes/portfolioRoute.js";
+
 
 
 // configure dotenv
@@ -69,7 +70,7 @@ app.use ('/api/v1', portfolioRoute);
 import swaggerDefinition from './swagger.json' assert { type: "json" };
 const options = {
     swaggerDefinition,
-    apis: ['../routes/blogsRoutes/*.js'], // Path to the API routes files
+    apis: ['../routes/*.js'], // Path to the API routes files
 };
 const swaggerSpec = swaggerJSDoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
