@@ -7,8 +7,8 @@ const router = express.Router()
 // defined route
 router.post('/querries', querryController.createQuerry)
 router.get('/querries', querryController.getQuerry)
-router.get('/querries/:id', querryController.getonequerry)
-router.delete('/querries/:id', verifyisAdmin, querryController.deletequerry)
+router.get('/querries-get/:id', querryController.getonequerry)
+router.delete('/querries-delete/:id', verifyisAdmin, querryController.deletequerry)
 
 
 

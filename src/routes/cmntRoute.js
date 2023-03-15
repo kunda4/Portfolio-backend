@@ -7,8 +7,8 @@ const router = express.Router()
 // defined route
 router.post('/comments', cmntController.createCmnt)
 router.get('/comments', cmntController.getCmnt)
-router.get('/comments/:id', cmntController.getoneCmnt)
-router.delete('/comments/:id', verifyisAdmin, cmntController.deleteCmnt)
+router.get('/comments-get/:id', cmntController.getoneCmnt)
+router.delete('/comments-delete/:id', verifyisAdmin, cmntController.deleteCmnt)
 
 
 
