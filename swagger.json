@@ -287,7 +287,7 @@
         }
       }
     },
-    "/Users-put/{id}":{
+    "/Users-update/{id}":{
       "put": {
         "security":{
           "Bearer": []
@@ -440,7 +440,7 @@
         }
       }
     },
-        "/Users": {
+        "/blogs": {
         "post":{
           "tags": [
             "Blog"
@@ -567,7 +567,7 @@
           }
         }   
       },
-      "/blogs-get/{id}":{
+      "/blogs/get/{id}":{
       "get": {
         "tags": [
           "Blog"
@@ -627,7 +627,7 @@
         }
       }
     },
-    "/blogs-put/{id}":{
+    "/blogs-update/{id}":{
       "put": {
         "security":{
           "Bearer": []
@@ -1424,7 +1424,7 @@
           }
         }
       },
-      "/portfolio-put/{id}":{
+      "/portfolio-update/{id}":{
         "put": {
           "security":{
             "Bearer": []
