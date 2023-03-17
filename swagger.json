@@ -8,40 +8,71 @@
     "host": "localhost:4000",
     "basePath": "/api/v1",
     "schemes": [
-      "http"
+      "http"  
     ],
+    "securityDefinitions":{
+      "Bearer": {
+       "type": "apiKey",
+       "name": "Authorization",
+       "in": "header",
+       "description":"token provided"
+       
+      }
+     
+     },
     "paths": {
       "/login": {
-        "post": {
+        "post":{
           "tags": [
             "User"
           ],
-          "summary": "Login with email and password",
-          "description": "",
-          "produces": [
+          "summary": "To login ",
+          "description": "To login with email and password",
+          "produces":[
             "application/json"
           ],
-          "parameters": [
-            {
-              "name": "email",
-              "in": "formData",
-              "description": "Email of the user",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "name": "password",
-              "in": "formData",
-              "description": "Password of the user",
-              "required": true,
-              "type": "string"
+          "parameters":[
+
+        { 
+          "name": "login",
+          "in":"body",
+          "description":"Login with your credential",
+          "required":true,
+          "schema":{
+            "type": "object",
+            "required": [
+              "email",
+              "password"
+            ],
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "password":{
+                "type":"string"
+              }
             }
+          }
+
+        }
           ],
           "responses": {
             "200": {
               "description": "OK",
               "schema": {
-                "$ref": ""
+                "type": "object",
+            "required": [
+              "email",
+              "password"
+            ],
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "password":{
+                "type":"string"
+              }
+            }
               }
             },
             "401": {
@@ -53,11 +84,1502 @@
             "500": {
               "description": "Internal Server Error",
               "schema": {
-                "$ref": ""
-              }
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                  }
+                }
             }
           }
         }
+      },
+      "/register": {
+        "post":{
+          "tags": [
+            "User"
+          ],
+          "summary": "To Register ",
+          "description": "Registerin",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+
+        { 
+          "name": "signup",
+          "in":"body",
+          "description":"Login with your credential",
+          "required":true,
+          "schema":{
+            "type": "object",
+            "required": [
+              "FullName",
+              "email",
+              "password",
+              "isAdmin"
+            ],
+            "properties": {
+              "FullName":{
+                "type":"string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "password":{
+                "type":"string"
+              },
+              "isAdmin":{
+                "type": "string"
+              }
+            }
+          }
+
+        }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "object",
+            "required": [
+              "email",
+              "password"
+            ],
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "password":{
+                "type":"string"
+              }
+            }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "schema": {
+                "$ref": ""
+              }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                  }
+                }
+            }
+          }
+        }
+      },
+      "/users": {
+        "get": {
+          "tags": [
+            "User"
+          ],
+          "in":"formData",
+          "summary": "Fetch all the Users",
+          "description": "This is all Users",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "message": "the User fetched successfully",
+                "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description":{
+                "type":"string"
+              },
+              "author":{
+                "type":"string"
+              },
+              "imageUrl":{
+                "type":"string"
+              }
+            }
+              }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                  }
+                }
+            }
+          }
+        }   
+      },
+      "/Users-get/{id}":{
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Fetch User by id",
+        "description": "This is User",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User to filter by",
+            "required": true,
+            "type": "string"
+           
+          } 
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "message": "the User fetched successfully",
+              "type": "string",
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description":{
+              "type":"string"
+            },
+            "author":{
+              "type":"string"
+            },
+            "imageUrl":{
+              "type":"string"
+            }
+          }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+                }
+              }
+          }
+          
+        }
       }
-    } 
-}
+    },
+    "/Users-put/{id}":{
+      "put": {
+        "security":{
+          "Bearer": []
+          }, 
+        "tags": [
+          "User"
+        ],
+        "summary": "Fetch User by id",
+        "description": "This is User",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User to filter by",
+            "required": true,
+            "type": "string"
+           
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User to filter by",
+            "required": true,
+            "schema":{
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description":{
+                  "type":"string"
+                },
+                "author":{
+                  "type":"string"
+                },
+                "imageUrl":{
+                  "type":"string"
+                }
+              }
+            }
+           
+          }  
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "message": "the User updated successfully",
+              "type": "object",
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description":{
+              "type":"string"
+            },
+            "author":{
+              "type":"string"
+            },
+            "imageUrl":{
+              "type":"string"
+            }
+          }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+                }
+              }
+          }
+          
+        }
+      }
+    },
+    "/Users-delete/{id}":{
+      "delete": {
+        "security":{
+          "Bearer": []
+          }, 
+        "tags": [
+          "User"
+        ],
+        "summary": "Fetch User by id",
+        "description": "This is User",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User to filter by",
+            "required": true,
+            "type": "string"
+           
+          } 
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "message": "the User updated successfully",
+              "type": "object",
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description":{
+              "type":"string"
+            },
+            "author":{
+              "type":"string"
+            },
+            "imageUrl":{
+              "type":"string"
+            }
+          }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+                }
+              }
+          }
+          
+        }
+      }
+    },
+        "/Users": {
+        "post":{
+          "tags": [
+            "Blog"
+          ],
+          "summary": "To create new Portfolio",
+          "description": "This is a new blog",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+
+        { 
+          "name": "blog",
+          "in":"body",
+          "description":"New Blog",
+          "required":true,
+          "schema":{
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description":{
+                "type":"string"
+              },
+              "author":{
+                "type":"string"
+              },
+              "imageUrl":{
+                "type":"string"
+              }
+            }
+          }
+
+        }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description":{
+                "type":"string"
+              },
+              "author":{
+                "type":"string"
+              },
+              "imageUrl":{
+                "type":"string"
+              }
+            }
+              }
+            },
+            
+            "500": {
+              "description": "Internal Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                  }
+                }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "Blog"
+          ],
+          "in":"formData",
+          "summary": "Fetch all the blogs",
+          "description": "This is all blogs",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "message": "the blog fetched successfully",
+                "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description":{
+                "type":"string"
+              },
+              "author":{
+                "type":"string"
+              },
+              "imageUrl":{
+                "type":"string"
+              }
+            }
+              }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                  }
+                }
+            }
+          }
+        }   
+      },
+      "/blogs-get/{id}":{
+      "get": {
+        "tags": [
+          "Blog"
+        ],
+        "summary": "Fetch blog by id",
+        "description": "This is blog",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "blog to filter by",
+            "required": true,
+            "type": "string"
+           
+          } 
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "message": "the blog fetched successfully",
+              "type": "string",
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description":{
+              "type":"string"
+            },
+            "author":{
+              "type":"string"
+            },
+            "imageUrl":{
+              "type":"string"
+            }
+          }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+                }
+              }
+          }
+          
+        }
+      }
+    },
+    "/blogs-put/{id}":{
+      "put": {
+        "security":{
+          "Bearer": []
+          }, 
+        "tags": [
+          "Blog"
+        ],
+        "summary": "Fetch blog by id",
+        "description": "This is blog",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "blog to filter by",
+            "required": true,
+            "type": "string"
+           
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "blog to filter by",
+            "required": true,
+            "schema":{
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description":{
+                  "type":"string"
+                },
+                "author":{
+                  "type":"string"
+                },
+                "imageUrl":{
+                  "type":"string"
+                }
+              }
+            }
+           
+          }  
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "message": "the blog updated successfully",
+              "type": "object",
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description":{
+              "type":"string"
+            },
+            "author":{
+              "type":"string"
+            },
+            "imageUrl":{
+              "type":"string"
+            }
+          }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+                }
+              }
+          }
+          
+        }
+      }
+    },
+    "/blogs-delete/{id}":{
+      "delete": {
+        "security":{
+          "Bearer": []
+          }, 
+        "tags": [
+          "Blog"
+        ],
+        "summary": "Fetch blog by id",
+        "description": "This is blog",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "blog to filter by",
+            "required": true,
+            "type": "string"
+           
+          } 
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "message": "the blog updated successfully",
+              "type": "object",
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description":{
+              "type":"string"
+            },
+            "author":{
+              "type":"string"
+            },
+            "imageUrl":{
+              "type":"string"
+            }
+          }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+                }
+              }
+          }
+          
+        }
+      }
+    },
+    "/querries": {
+      "post":{
+        "tags": [
+          "Querry"
+        ],
+        "summary": "To create new querry",
+        "description": "This is a new querry",
+        "produces":[
+          "application/json"
+        ],
+        "parameters":[
+
+      { 
+        "name": "querry",
+        "in":"body",
+        "description":"New Querry",
+        "required":true,
+        "schema":{
+          "type": "object",
+          "required": [
+            "name"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email":{
+              "type":"string"
+            },
+            "querry":{
+              "type":"string"
+            }
+          }
+        }
+
+      }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+          "required": [
+            "name"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description":{
+              "type":"string"
+            },
+            "author":{
+              "type":"string"
+            },
+            "imageUrl":{
+              "type":"string"
+            }
+          }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": ""
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+                }
+              }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Querry"
+        ],
+        "in":"formData",
+        "summary": "Fetch all the querriess",
+        "description": "This is querry",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "message": "the querry fetched successfully",
+              "type": "object",
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email":{
+              "type":"string"
+            },
+            "querry":{
+              "type":"string"
+            }
+          }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+                }
+              }
+          }
+        }
+      }
+    },
+      "/querries-get/{id}":{
+        "get": {
+          "tags": [
+            "Querry"
+          ],
+          "summary": "Fetch querry by id",
+          "description": "This is querry",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "blog to filter by",
+              "required": true,
+              "type": "string"
+             
+            } 
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "message": "the querry fetched successfully",
+                "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "email":{
+                "type":"string"
+              },
+              "querry":{
+                "type":"string"
+              }
+            }
+              }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                  }
+                }
+            }
+            
+          }
+        }
+      },
+     
+      "/querries-delete/{id}":{
+        "delete": {
+          "tags": [
+            "Querry"
+          ],
+          "summary": "delete querry by id",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "blog to filter by",
+              "required": true,
+              "type": "string"
+             
+            } 
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "message": "the querry deleted successfully",
+                "type": "object",
+            "required": [
+              "id"
+            ]
+           
+              }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                  }
+                }
+            }
+            
+          }
+        }
+      },
+      "/comments": {
+        "post":{
+          "tags": [
+            "Comment"
+          ],
+          "summary": "To create new comment",
+          "description": "This is a new comment",
+          "produces":[
+            "application/json"
+          ],
+          "parameters":[
+  
+        { 
+          "name": "comment",
+          "in":"body",
+          "description":"New Comment",
+          "required":true,
+          "schema":{
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "email":{
+                "type":"string"
+              },
+              "comment":{
+                "type":"string"
+              }
+            }
+          }
+  
+        }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "email":{
+                "type":"string"
+              },
+              "comment":{
+                "type":"string"
+              }
+            }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "schema": {
+                "$ref": ""
+              }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                  }
+                }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "Comment"
+          ],
+          "in":"formData",
+          "summary": "Fetch all the Comments",
+          "description": "This is comment",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "message": "the Comment fetched successfully",
+                "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "email":{
+                "type":"string"
+              },
+              "comment":{
+                "type":"string"
+              }
+            }
+              }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                  }
+                }
+            }
+          }
+        }
+      },
+        "/comments-get/{id}":{
+          "get": {
+            "tags": [
+              "Comment"
+            ],
+            "summary": "Fetch Comment by id",
+            "description": "This is Comment",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "description": "comment to filter by",
+                "required": true,
+                "type": "string"
+               
+              } 
+            ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "message": "the Comment fetched successfully",
+                  "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email":{
+                  "type":"string"
+                },
+                "Comment":{
+                  "type":"string"
+                }
+              }
+                }
+              },
+              "500": {
+                "description": "Internal Server Error",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                    }
+                  }
+              }
+              
+            }
+          }
+        },
+        
+        "/comments-delete/{id}":{
+          "delete": {
+            "tags": [
+              "Comment"
+            ],
+            "summary": "delete querry by id",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "description": "blog to filter by",
+                "required": true,
+                "type": "string"
+               
+              } 
+            ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "message": "the querry deleted successfully",
+                  "type": "object",
+              "required": [
+                "id"
+              ]
+             
+                }
+              },
+              "500": {
+                "description": "Internal Server Error",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                    }
+                  }
+              }
+              
+            }
+          }
+        },
+        "/portfolio": {
+          "post":{
+            "tags": [
+              "Portfolio"
+            ],
+            "summary": "To create new Project",
+            "description": "This is a new Project",
+            "produces":[
+              "application/json"
+            ],
+            "parameters":[
+  
+          { 
+            "name": "portfolio",
+            "in":"body",
+            "description":"New Blog",
+            "required":true,
+            "schema":{
+              "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description":{
+                  "type":"string"
+                },
+                "author":{
+                  "type":"string"
+                },
+                "imageUrl":{
+                  "type":"string"
+                }
+              }
+            }
+  
+          }
+            ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "type": "object",
+              "required": [
+                "name"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description":{
+                  "type":"string"
+                },
+                "author":{
+                  "type":"string"
+                },
+                "imageUrl":{
+                  "type":"string"
+                }
+              }
+                }
+              },
+              
+              "500": {
+                "description": "Internal Server Error",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                    }
+                  }
+              }
+            }
+          },
+          "get": {
+            "tags": [
+              "Portfolio"
+            ],
+            "in":"formData",
+            "summary": "Fetch all the Project",
+            "description": "This is all Project",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "message": "the Projects fetched successfully",
+                  "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description":{
+                  "type":"string"
+                },
+                "author":{
+                  "type":"string"
+                },
+                "imageUrl":{
+                  "type":"string"
+                }
+              }
+                }
+              },
+              "500": {
+                "description": "Internal Server Error",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                    }
+                  }
+              }
+            }
+          }   
+        },
+        "/portfolio-get/{id}":{
+        "get": {
+          "tags": [
+            "Portfolio"
+          ],
+          "summary": "Fetch Portfolio by id",
+          "description": "This is Portfolio",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Portfolio to filter by",
+              "required": true,
+              "type": "string"
+             
+            } 
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "message": "the Portfolio fetched successfully",
+                "type": "string",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description":{
+                "type":"string"
+              },
+              "author":{
+                "type":"string"
+              },
+              "imageUrl":{
+                "type":"string"
+              }
+            }
+              }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                  }
+                }
+            }
+            
+          }
+        }
+      },
+      "/portfolio-put/{id}":{
+        "put": {
+          "security":{
+            "Bearer": []
+            }, 
+          "tags": [
+            "Portfolio"
+          ],
+          "summary": "Fetch Portfolio by id",
+          "description": "This is Portfolio",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Portfolio to filter by",
+              "required": true,
+              "type": "string"
+             
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "description": "Portfolio to filter by",
+              "required": true,
+              "schema":{
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description":{
+                    "type":"string"
+                  },
+                  "author":{
+                    "type":"string"
+                  },
+                  "imageUrl":{
+                    "type":"string"
+                  }
+                }
+              }
+             
+            }  
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "message": "the Portfolio updated successfully",
+                "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description":{
+                "type":"string"
+              },
+              "author":{
+                "type":"string"
+              },
+              "imageUrl":{
+                "type":"string"
+              }
+            }
+              }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                  }
+                }
+            }
+            
+          }
+        }
+      },
+      "/portfolio-delete/{id}":{
+        "delete": {
+          "security":{
+            "Bearer": []
+            }, 
+          "tags": [
+            "Portfolio"
+          ],
+          "summary": "Fetch Portfolio by id",
+          "description": "This is Portfolio",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Portfolio to filter by",
+              "required": true,
+              "type": "string"
+             
+            } 
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "message": "the Portfolio updated successfully",
+                "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description":{
+                "type":"string"
+              },
+              "author":{
+                "type":"string"
+              },
+              "imageUrl":{
+                "type":"string"
+              }
+            }
+              }
+            },
+            "500": {
+              "description": "Internal Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                  }
+                }
+            }
+            
+          }
+        }
+      }
+        
+    }
+  }
+  
+        
+  
