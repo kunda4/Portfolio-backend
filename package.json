@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "mocha --timeout 50000 --exit test/",
+    "build": "npm install && echo `Build successfull`",
     "dev": "nodemon src/server.js"
   },
   "author": "Kunda",
@@ -21,6 +22,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "joi": "^17.8.4",
     "jsonwebtoken": "^9.0.0",
     "lowdb": "^5.1.0",
     "mongoose": "^7.0.1",

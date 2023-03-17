@@ -11,5 +11,4 @@ router.get('/querries-get/:id', querryController.getonequerry)
 router.delete('/querries-delete/:id',  querryController.deletequerry)
 
 
-
 export default router;
