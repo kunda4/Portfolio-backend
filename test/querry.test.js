@@ -57,11 +57,11 @@ describe ('GET /querries', ()=>{
 });
 
 
-describe('GET /querries-get/{id}', function() {
+describe('GET /querries/get/{id}', function() {
   it('should return a specific querries post', function(done) {
     const querriesId = "6410346f79fe12ef911fad0d";
     chai.request(app)
-      .get(`/api/v1/querries-get/${querriesId}`)
+      .get(`/api/v1/querries/get/${querriesId}`)
       .end(function(err, res) {
         expect(res).to.have.status(200);
         expect(res.body._id).to.equal(querriesId);
@@ -72,11 +72,11 @@ describe('GET /querries-get/{id}', function() {
 });
 
 
-  describe('DELETE /querries-delete/{id}', function() {
+  describe('DELETE /querries/delete/{id}', function() {
     it('should delete a specific querries post', function(done) {
       const querriesId = "6410346f79fe12ef911fad0d";
       chai.request(app)
-        .delete(`/api/v1/querries-delete/${querriesId}`)
+        .delete(`/api/v1/querries/delete/${querriesId}`)
         .end(function(err, res) {
           expect(res).to.have.status(200);
           expect(res.body.message).to.equal('querry post deleted successfully.');

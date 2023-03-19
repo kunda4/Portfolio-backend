@@ -61,7 +61,7 @@ describe('GET /blogs-get/{id}', function() {
   it('should return a specific blog post', function(done) {
     const blogId = "640f0886e363a682d956b544";
     chai.request(app)
-      .get(`/api/v1/blogs-get/${blogId}`)
+      .get(`/api/v1/blogs/get/${blogId}`)
       .end(function(err, res) {
         expect(res).to.have.status(200);
         expect(res.body._id).to.equal(blogId);
@@ -71,7 +71,7 @@ describe('GET /blogs-get/{id}', function() {
   });
 });
 
-describe('PUT /blogs-update/{id}', function() {
+describe('PUT /blogs/update/{id}', function() {
   it('should update a specific blog post', function(done) {
     const blogId = "640f0886e363a682d956b544";
     const newBlog = {
@@ -81,7 +81,7 @@ describe('PUT /blogs-update/{id}', function() {
       imageUrl: "Updated Test Post"
     }
     chai.request(app)
-      .put(`/api/v1/blogs-update/${blogId}`)
+      .put(`/api/v1/blogs/update/${blogId}`)
       .send(newBlog)
       .end(function(err, res) {
         console.log ("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
@@ -100,7 +100,7 @@ describe('PUT /blogs-update/{id}', function() {
 });
 
 
-  describe('DELETE /blogs-delete/{id}', function() {
+  describe('DELETE /blogs/delete/{id}', function() {
     it('should delete a specific blog post', function(done) {
       const blogId = "640f0886e363a682d956b544";
       chai.request(app)
