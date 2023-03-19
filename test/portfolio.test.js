@@ -57,11 +57,11 @@ describe ('GET /portfolio', ()=>{
 });
 
 
-describe('GET /portfolio-get/{id}', function() {
+describe('GET /portfolio/get/{id}', function() {
   it('should return a specific portfolio post', function(done) {
     const portfolioId = "6410346f79fe12ef911fad0d";
     chai.request(app)
-      .get(`/api/v1/portfolio-get/${portfolioId}`)
+      .get(`/api/v1/portfolio/get/${portfolioId}`)
       .end(function(err, res) {
         expect(res).to.have.status(200);
         expect(res.body._id).to.equal(portfolioId);
@@ -71,7 +71,7 @@ describe('GET /portfolio-get/{id}', function() {
   });
 });
 
-describe('PUT /portfolio-update/{id}', function() {
+describe('PUT /portfolio/update/{id}', function() {
   it('should update a specific portfolio post', function(done) {
     const portfolioId = "6410346f79fe12ef911fad0d";
     const newportfolio = {
@@ -82,7 +82,7 @@ describe('PUT /portfolio-update/{id}', function() {
       
     }
     chai.request(app)
-      .put(`/api/v1/portfolio-update/${portfolioId}`)
+      .put(`/api/v1/portfolio/update/${portfolioId}`)
       .send(newportfolio)
       .end(function(err, res) {
         console.log ("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
@@ -102,11 +102,11 @@ describe('PUT /portfolio-update/{id}', function() {
 });
 
 
-  describe('DELETE /portfolio-delete/{id}', function() {
+  describe('DELETE /portfolio/delete/{id}', function() {
     it('should delete a specific portfolio post', function(done) {
       const portfolioId = "6410346f79fe12ef911fad0d";
       chai.request(app)
-        .delete(`/api/v1/portfolio-delete/${portfolioId}`)
+        .delete(`/api/v1/portfolio/delete/${portfolioId}`)
         .end(function(err, res) {
           expect(res).to.have.status(200);
           expect(res.body.message).to.equal('portfolio post deleted successfully.');

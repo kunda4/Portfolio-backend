@@ -80,11 +80,11 @@ describe ('GET /users', ()=>{
 });
 
 
-describe('GET /users-get/{id}', function() {
+describe('GET /users/get/{id}', function() {
   it('should return a specific user post', function(done) {
     const userId = "6411c702392824a6746e252b";
     chai.request(app)
-      .get(`/api/v1/users-get/${userId}`)
+      .get(`/api/v1/users/get/${userId}`)
       .end(function(err, res) {
         expect(res).to.have.status(200);
         expect(res.body._id).to.equal(userId);
@@ -94,7 +94,7 @@ describe('GET /users-get/{id}', function() {
   });
 });
 
-describe('PUT /users-update/{id}', function() {
+describe('PUT /users/update/{id}', function() {
   it('should update a specific user post', function(done) {
     const userId = "6411c702392824a6746e252b";
     const newuser = {
@@ -104,7 +104,7 @@ describe('PUT /users-update/{id}', function() {
       isAdmin: true
     }
     chai.request(app)
-      .put(`/api/v1/users-update/${userId}`)
+      .put(`/api/v1/users/update/${userId}`)
       .send(newuser)
       .end(function(err, res) {
         console.log ("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
@@ -123,11 +123,11 @@ describe('PUT /users-update/{id}', function() {
 });
 
 
-  describe('DELETE /users-delete/{id}', function() {
+  describe('DELETE /users/delete/{id}', function() {
     it('should delete a specific user post', function(done) {
       const userId = "640f0886e363a682d956b544";
       chai.request(app)
-        .delete(`/api/v1/users-delete/${userId}`)
+        .delete(`/api/v1/users/delete/${userId}`)
         .end(function(err, res) {
           expect(res).to.have.status(200);
           expect(res.body.message).to.equal('user post deleted successfully.');

@@ -55,11 +55,11 @@ describe ('GET /comments', ()=>{
 });
 
 
-describe('GET /comments-get/{id}', function() {
+describe('GET /comments/get/{id}', function() {
   it('should return a specific comments post', function(done) {
     const commentsId = "6410346f79fe12ef911fad0d";
     chai.request(app)
-      .get(`/api/v1/comments-get/${commentsId}`)
+      .get(`/api/v1/comments/get/${commentsId}`)
       .end(function(err, res) {
         expect(res).to.have.status(200);
         expect(res.body._id).to.equal(commentsId);
@@ -70,11 +70,11 @@ describe('GET /comments-get/{id}', function() {
 });
 
 
-  describe('DELETE /comments-delete/{id}', function() {
+  describe('DELETE /comments/delete/{id}', function() {
     it('should delete a specific comments post', function(done) {
       const commentsId = "6410346f79fe12ef911fad0d";
       chai.request(app)
-        .delete(`/api/v1/comments-delete/${commentsId}`)
+        .delete(`/api/v1/comments/delete/${commentsId}`)
         .end(function(err, res) {
           expect(res).to.have.status(200);
           expect(res.body.message).to.equal('comment post deleted successfully.');
