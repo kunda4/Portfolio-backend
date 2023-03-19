@@ -6,7 +6,7 @@
     },
     "deploy": {
       "startCommand": "echo starting!",
-      "healthcheckPath": "/",
+      "healthcheckPath": "/api/v1",
       "healthcheckTimeout": 100,
       "restartPolicyType": "NEVER"
     }
