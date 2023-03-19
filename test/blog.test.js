@@ -57,7 +57,7 @@ describe ('GET /blogs', ()=>{
 });
 
 
-describe('GET /blogs-get/{id}', function() {
+describe('GET /blogs/get/{id}', function() {
   it('should return a specific blog post', function(done) {
     const blogId = "640f0886e363a682d956b544";
     chai.request(app)
@@ -104,7 +104,7 @@ describe('PUT /blogs/update/{id}', function() {
     it('should delete a specific blog post', function(done) {
       const blogId = "640f0886e363a682d956b544";
       chai.request(app)
-        .delete(`/api/v1/blogs-delete/${blogId}`)
+        .delete(`/api/v1/blogs/delete/${blogId}`)
         .end(function(err, res) {
           expect(res).to.have.status(200);
           expect(res.body.message).to.equal('Blog post deleted successfully.');
