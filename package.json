@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "mocha --timeout 50000 --exit test/",
+    "build": "npm install && echo `Build successfull`",
     "dev": "nodemon src/server.js",
     "start": "node server.js"
   },

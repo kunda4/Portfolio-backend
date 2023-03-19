@@ -227,7 +227,7 @@
           }
         }   
       },
-      "/Users-get/{id}":{
+      "/Users/get/{id}":{
       "get": {
         "tags": [
           "User"
@@ -287,7 +287,7 @@
         }
       }
     },
-    "/Users-update/{id}":{
+    "/Users/update/{id}":{
       "put": {
         "security":{
           "Bearer": []
@@ -377,7 +377,7 @@
         }
       }
     },
-    "/Users-delete/{id}":{
+    "/Users/delete/{id}":{
       "delete": {
         "security":{
           "Bearer": []
@@ -627,7 +627,7 @@
         }
       }
     },
-    "/blogs-update/{id}":{
+    "/blogs/update/{id}":{
       "put": {
         "security":{
           "Bearer": []
@@ -717,7 +717,7 @@
         }
       }
     },
-    "/blogs-delete/{id}":{
+    "/blogs/delete/{id}":{
       "delete": {
         "security":{
           "Bearer": []
@@ -906,7 +906,7 @@
         }
       }
     },
-      "/querries-get/{id}":{
+      "/querries/get/{id}":{
         "get": {
           "tags": [
             "Querry"
@@ -964,7 +964,7 @@
         }
       },
      
-      "/querries-delete/{id}":{
+      "/querries/delete/{id}":{
         "delete": {
           "tags": [
             "Querry"
@@ -1133,7 +1133,7 @@
           }
         }
       },
-        "/comments-get/{id}":{
+        "/comments/get/{id}":{
           "get": {
             "tags": [
               "Comment"
@@ -1191,7 +1191,7 @@
           }
         },
         
-        "/comments-delete/{id}":{
+        "/comments/delete/{id}":{
           "delete": {
             "tags": [
               "Comment"
@@ -1364,7 +1364,7 @@
             }
           }   
         },
-        "/portfolio-get/{id}":{
+        "/portfolio/get/{id}":{
         "get": {
           "tags": [
             "Portfolio"
@@ -1424,7 +1424,7 @@
           }
         }
       },
-      "/portfolio-update/{id}":{
+      "/portfolio/update/{id}":{
         "put": {
           "security":{
             "Bearer": []
@@ -1514,7 +1514,7 @@
           }
         }
       },
-      "/portfolio-delete/{id}":{
+      "/portfolio/delete/{id}":{
         "delete": {
           "security":{
             "Bearer": []
