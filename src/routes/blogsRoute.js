@@ -6,7 +6,7 @@ import blogsController from '../controllers/blogsController.js';
 const router = express.Router()
 
 // defined blogs route
-router.post('/blogs', verifyisAdmin, blogsController.createBlog, 
+router.post('/blogs',  blogsController.createBlog, 
 function(req, res) {
     var token = req.headers.authorization;
     if (!token) {

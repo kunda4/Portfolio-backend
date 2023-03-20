@@ -22,27 +22,26 @@
      },
     "paths": {
       "/login": {
-        "post":{
+        "post": {
           "tags": [
             "User"
           ],
-          "summary": "To login ",
-          "description": "To login with email and password",
+          "summary": "User Login",
+          "description": "User login with email and password",
           "produces":[
             "application/json"
           ],
           "parameters":[
-
+  
         { 
-          "name": "login",
+          "name": "User",
           "in":"body",
-          "description":"Login with your credential",
+          "description":"New User",
           "required":true,
           "schema":{
             "type": "object",
             "required": [
-              "email",
-              "password"
+              "email"
             ],
             "properties": {
               "email": {
@@ -53,126 +52,68 @@
               }
             }
           }
-
+  
         }
           ],
           "responses": {
             "200": {
-              "description": "OK",
-              "schema": {
-                "type": "object",
-            "required": [
-              "email",
-              "password"
-            ],
-            "properties": {
-              "email": {
-                "type": "string"
-              },
-              "password":{
-                "type":"string"
-              }
-            }
-              }
+              "description": "successfully"
             },
-            "401": {
-              "description": "Unauthorized",
-              "schema": {
-                "$ref": ""
-              }
+            "400": {
+              "description": "Invalid credation"
             },
             "500": {
-              "description": "Internal Server Error",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  }
-                  }
-                }
+              "description": "Internal Server Error"
             }
           }
         }
       },
       "/register": {
-        "post":{
-          "tags": [
-            "User"
-          ],
-          "summary": "To Register ",
-          "description": "Registerin",
+        "post": {
+          "tags": ["User"],
+          "summary": "User SignUp",
+          "description":"New User",
           "produces":[
             "application/json"
           ],
           "parameters":[
-
+  
         { 
-          "name": "signup",
+          "name": "User",
           "in":"body",
-          "description":"Login with your credential",
           "required":true,
           "schema":{
             "type": "object",
             "required": [
-              "FullName",
-              "email",
-              "password",
-              "isAdmin"
+              "name"
             ],
             "properties": {
-              "FullName":{
-                "type":"string"
-              },
-              "email": {
+              "FullName": {
                 "type": "string"
+              },
+              "email":{
+                "type":"string"
               },
               "password":{
                 "type":"string"
               },
               "isAdmin":{
-                "type": "string"
+                "type": "boolean"
               }
             }
           }
-
+  
         }
           ],
           "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "type": "object",
-            "required": [
-              "email",
-              "password"
-            ],
-            "properties": {
-              "email": {
-                "type": "string"
-              },
-              "password":{
-                "type":"string"
-              }
-            }
-              }
+            "201": {
+              "description": "New User was created successfully"
             },
-            "401": {
-              "description": "Unauthorized",
-              "schema": {
-                "$ref": ""
-              }
+            "400": {
+              "description": "Bad Request"
             },
             "500": {
-              "description": "Internal Server Error",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  }
-                  }
-                }
+              "description": "Internal Server Error"
             }
           }
         }
@@ -184,45 +125,18 @@
           ],
           "in":"formData",
           "summary": "Fetch all the Users",
-          "description": "This is all Users",
+          "description": "Get all Users",
+          "parameters": [],
+          "security": [],
           "produces": [
             "application/json"
           ],
           "responses": {
             "200": {
-              "description": "OK",
-              "schema": {
-                "message": "the User fetched successfully",
-                "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "description":{
-                "type":"string"
-              },
-              "author":{
-                "type":"string"
-              },
-              "imageUrl":{
-                "type":"string"
-              }
-            }
-              }
+              "description": "successfully"
             },
-            "500": {
-              "description": "Internal Server Error",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  }
-                  }
-                }
+           "500": {
+              "description": "Internal Server Error"
             }
           }
         }   
@@ -233,7 +147,7 @@
           "User"
         ],
         "summary": "Fetch User by id",
-        "description": "This is User",
+        "description": "Get User by ID",
         "produces": [
           "application/json"
         ],
@@ -241,49 +155,16 @@
           {
             "name": "id",
             "in": "path",
-            "description": "User to filter by",
-            "required": true,
-            "type": "string"
-           
+            "required": true         
           } 
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "message": "the User fetched successfully",
-              "type": "string",
-          "required": [
-            "id"
-          ],
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "description":{
-              "type":"string"
-            },
-            "author":{
-              "type":"string"
-            },
-            "imageUrl":{
-              "type":"string"
-            }
-          }
-            }
+            "description": "successfully"
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-                }
-              }
+         "500": {
+            "description": "Internal Server Error"
           }
-          
         }
       }
     },
@@ -292,89 +173,65 @@
         "security":{
           "bearerAuth": []
           }, 
-        "tags": [
-          "User"
-        ],
-        "summary": "Fetch User by id",
-        "description": "This is User",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "User to filter by",
-            "required": true,
-            "type": "string"
-           
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "User to filter by",
-            "required": true,
-            "schema":{
-              "type": "object",
-              "required": [
-                "name"
-              ],
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description":{
-                  "type":"string"
-                },
-                "author":{
-                  "type":"string"
-                },
-                "imageUrl":{
-                  "type":"string"
+          "tags": [
+            "User"
+          ],
+          "summary": "Update user by id",
+          "description": "User login with email and password",
+          "produces":[
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "User to filter by",
+              "required": true,
+              "type": "string"
+             
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "description": "User to filter by",
+              "required": true,
+              "schema":{
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "FullName": {
+                    "type": "string"
+                  },
+                  "email":{
+                    "type":"string"
+                  },
+                  "password":{
+                    "type":"string"
+                  },
+                  "isAdmin":{
+                    "type": "boolean"
+                  }
                 }
               }
-            }
-           
-          }  
-        ],
+            }  
+          ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "message": "the User updated successfully",
-              "type": "object",
-          "required": [
-            "id"
-          ],
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "description":{
-              "type":"string"
-            },
-            "author":{
-              "type":"string"
-            },
-            "imageUrl":{
-              "type":"string"
-            }
-          }
-            }
+            "description": "Updated successfully"
+          },
+          "401": {
+            "description": "User Not Authorized"
+          },
+          "404": {
+            "description": "User doesn't exist!"
           },
           "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-                }
-              }
+            "description": "Internal Server Error"
           }
-          
         }
+          
       }
     },
     "/Users/delete/{id}":{
@@ -385,8 +242,8 @@
         "tags": [
           "User"
         ],
-        "summary": "Fetch User by id",
-        "description": "This is User",
+        "summary": " delete User by id",
+        "description": "This is remaining Users",
         "produces": [
           "application/json"
         ],
@@ -394,71 +251,39 @@
           {
             "name": "id",
             "in": "path",
-            "description": "User to filter by",
-            "required": true,
-            "type": "string"
-           
-          } 
+            "required": true
+          }
         ],
+        
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "message": "the User updated successfully",
-              "type": "object",
-          "required": [
-            "id"
-          ],
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "description":{
-              "type":"string"
-            },
-            "author":{
-              "type":"string"
-            },
-            "imageUrl":{
-              "type":"string"
-            }
-          }
-            }
+            "description": " deleted successfully"
+          },
+          "401": {
+            "description": "User Not Authorized"
+          },
+          "404": {
+            "description": "Article doesn't exist!"
           },
           "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-                }
-              }
+            "description": "Internal Server Error"
           }
-          
         }
       }
     },
         "/blogs": {
         "post":{
-          "security":{
-            "bearerAuth": []
-            },
-          "tags": [
-            "Blog"
-          ],
-          "summary": "To create new Portfolio",
-          "description": "This is a new blog",
+          "tags": ["Blog"],
+          "summary": "Create new Blog",
+          "description":"New Blog",
           "produces":[
             "application/json"
           ],
           "parameters":[
-
+  
         { 
-          "name": "blog",
+          "name": "Blog",
           "in":"body",
-          "description":"New Blog",
           "required":true,
           "schema":{
             "type": "object",
@@ -469,256 +294,151 @@
               "name": {
                 "type": "string"
               },
+              "imageUrl":{
+                "type":"string"
+              },
               "description":{
                 "type":"string"
               },
               "author":{
-                "type":"string"
-              },
-              "imageUrl":{
-                "type":"string"
+                "type": "string"
               }
             }
           }
-
+  
         }
           ],
           "responses": {
             "200": {
-              "description": "OK",
-              "schema": {
-                "type": "object",
-            "required": [
-              "name"
-            ],
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "description":{
-                "type":"string"
-              },
-              "author":{
-                "type":"string"
-              },
-              "imageUrl":{
-                "type":"string"
-              }
-            }
-              }
+              "description": "successfully"
             },
-            
+            "401": {
+              "description": "User Not Authorized"
+            },
+            "404": {
+              "description": "Blog doesn't exist!"
+            },
             "500": {
-              "description": "Internal Server Error",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  }
-                  }
-                }
+              "description": "Internal Server Error"
             }
           }
-        },
+          },
+       
         "get": {
           "tags": [
             "Blog"
           ],
           "in":"formData",
-          "summary": "Fetch all the blogs",
-          "description": "This is all blogs",
+          "summary": "Fetch all the Blogs",
+          "description": "Get all blogs",
+          "parameters": [],
+          "security": [],
           "produces": [
             "application/json"
           ],
           "responses": {
             "200": {
-              "description": "OK",
-              "schema": {
-                "message": "the blog fetched successfully",
-                "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "description":{
-                "type":"string"
-              },
-              "author":{
-                "type":"string"
-              },
-              "imageUrl":{
-                "type":"string"
-              }
-            }
-              }
+              "description": "successfully"
             },
-            "500": {
-              "description": "Internal Server Error",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  }
-                  }
-                }
+           "500": {
+              "description": "Internal Server Error"
             }
           }
-        }   
+        } 
       },
       "/blogs/get/{id}":{
-      "get": {
-        "tags": [
-          "Blog"
-        ],
-        "summary": "Fetch blog by id",
-        "description": "This is blog",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "blog to filter by",
-            "required": true,
-            "type": "string"
-           
-          } 
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "message": "the blog fetched successfully",
-              "type": "string",
-          "required": [
-            "id"
+        "get": {
+          "tags": [
+            "Blog"
           ],
-          "properties": {
-            "name": {
-              "type": "string"
+          "summary": "Fetch Blog by id",
+          "description": "Get Blog by ID",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true         
+            } 
+          ],
+          "responses": {
+            "200": {
+              "description": "successfully"
             },
-            "description":{
-              "type":"string"
-            },
-            "author":{
-              "type":"string"
-            },
-            "imageUrl":{
-              "type":"string"
+           "500": {
+              "description": "Internal Server Error"
             }
           }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-                }
-              }
-          }
-          
         }
-      }
     },
     "/blogs/update/{id}":{
       "put": {
         "security":{
-          "Bearer": []
+          "bearerAuth": []
           }, 
         "tags": [
           "Blog"
         ],
-        "summary": "Fetch blog by id",
-        "description": "This is blog",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "blog to filter by",
-            "required": true,
-            "type": "string"
-           
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "blog to filter by",
-            "required": true,
-            "schema":{
-              "type": "object",
-              "required": [
-                "name"
-              ],
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description":{
-                  "type":"string"
-                },
-                "author":{
-                  "type":"string"
-                },
-                "imageUrl":{
-                  "type":"string"
+        "summary": "Update user by id",
+        "description": "User login with email and password",
+          "produces":[
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "User to filter by",
+              "required": true,
+              "type": "string"
+             
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "description": "User to filter by",
+              "required": true,
+              "schema":{
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "imageUrl":{
+                    "type":"string"
+                  },
+                  "description":{
+                    "type":"string"
+                  },
+                  "author":{
+                    "type": "boolean"
+                  }
                 }
               }
-            }
-           
-          }  
-        ],
+            }  
+          ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "message": "the blog updated successfully",
-              "type": "object",
-          "required": [
-            "id"
-          ],
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "description":{
-              "type":"string"
-            },
-            "author":{
-              "type":"string"
-            },
-            "imageUrl":{
-              "type":"string"
-            }
-          }
-            }
+            "description": "successfully"
+          },
+          "401": {
+            "description": "User Not Authorized"
+          },
+          "404": {
+            "description": "Blog doesn't exist!"
           },
           "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-                }
-              }
+            "description": "Internal Server Error"
           }
-          
         }
-      }
+          
+      }     
+       
     },
     "/blogs/delete/{id}":{
       "delete": {
@@ -728,8 +448,8 @@
         "tags": [
           "Blog"
         ],
-        "summary": "Fetch blog by id",
-        "description": "This is blog",
+        "summary": "delete Blog by id",
+        "description": "This is Blog",
         "produces": [
           "application/json"
         ],
@@ -737,49 +457,23 @@
           {
             "name": "id",
             "in": "path",
-            "description": "blog to filter by",
-            "required": true,
-            "type": "string"
-           
-          } 
+            "required": true
+          }
         ],
+      
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "message": "the blog updated successfully",
-              "type": "object",
-          "required": [
-            "id"
-          ],
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "description":{
-              "type":"string"
-            },
-            "author":{
-              "type":"string"
-            },
-            "imageUrl":{
-              "type":"string"
-            }
-          }
-            }
+            "description": " deleted successfully"
+          },
+          "401": {
+            "description": "User Not Authorized"
+          },
+          "404": {
+            "description": "Article doesn't exist!"
           },
           "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-                }
-              }
+            "description": "Internal Server Error"
           }
-          
         }
       }
     },
@@ -822,44 +516,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-          "required": [
-            "name"
-          ],
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "description":{
-              "type":"string"
-            },
-            "author":{
-              "type":"string"
-            },
-            "imageUrl":{
-              "type":"string"
-            }
-          }
-            }
+            "description": "successfully"
           },
           "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": ""
-            }
+            "description": "User Not Authorized"
+          },
+          "404": {
+            "description": "Blog doesn't exist!"
           },
           "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-                }
-              }
+            "description": "Internal Server Error"
           }
         }
       },
@@ -875,36 +541,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "message": "the querry fetched successfully",
-              "type": "object",
-          "required": [
-            "id"
-          ],
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "email":{
-              "type":"string"
-            },
-            "querry":{
-              "type":"string"
-            }
-          }
-            }
+            "description": "successfully"
           },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-                }
-              }
+         "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -931,38 +571,11 @@
           ],
           "responses": {
             "200": {
-              "description": "OK",
-              "schema": {
-                "message": "the querry fetched successfully",
-                "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "email":{
-                "type":"string"
-              },
-              "querry":{
-                "type":"string"
-              }
-            }
-              }
+              "description": "successfully"
             },
-            "500": {
-              "description": "Internal Server Error",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  }
-                  }
-                }
+           "500": {
+              "description": "Internal Server Error"
             }
-            
           }
         }
       },
@@ -988,28 +601,17 @@
           ],
           "responses": {
             "200": {
-              "description": "OK",
-              "schema": {
-                "message": "the querry deleted successfully",
-                "type": "object",
-            "required": [
-              "id"
-            ]
-           
-              }
+              "description": " deleted successfully"
+            },
+            "401": {
+              "description": "User Not Authorized"
+            },
+            "404": {
+              "description": "Article doesn't exist!"
             },
             "500": {
-              "description": "Internal Server Error",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  }
-                  }
-                }
+              "description": "Internal Server Error"
             }
-            
           }
         }
       },
@@ -1052,41 +654,16 @@
           ],
           "responses": {
             "200": {
-              "description": "OK",
-              "schema": {
-                "type": "object",
-            "required": [
-              "name"
-            ],
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "email":{
-                "type":"string"
-              },
-              "comment":{
-                "type":"string"
-              }
-            }
-              }
+              "description": "deleted successfully"
             },
             "401": {
-              "description": "Unauthorized",
-              "schema": {
-                "$ref": ""
-              }
+              "description": "User Not Authorized"
+            },
+            "404": {
+              "description": "Blog doesn't exist!"
             },
             "500": {
-              "description": "Internal Server Error",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  }
-                  }
-                }
+              "description": "Internal Server Error"
             }
           }
         },
@@ -1102,36 +679,10 @@
           ],
           "responses": {
             "200": {
-              "description": "OK",
-              "schema": {
-                "message": "the Comment fetched successfully",
-                "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "email":{
-                "type":"string"
-              },
-              "comment":{
-                "type":"string"
-              }
-            }
-              }
+              "description": "successfully"
             },
-            "500": {
-              "description": "Internal Server Error",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  }
-                  }
-                }
+           "500": {
+              "description": "Internal Server Error"
             }
           }
         }
@@ -1158,38 +709,11 @@
             ],
             "responses": {
               "200": {
-                "description": "OK",
-                "schema": {
-                  "message": "the Comment fetched successfully",
-                  "type": "object",
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "email":{
-                  "type":"string"
-                },
-                "Comment":{
-                  "type":"string"
-                }
-              }
-                }
+                "description": "successfully"
               },
-              "500": {
-                "description": "Internal Server Error",
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                    }
-                  }
+             "500": {
+                "description": "Internal Server Error"
               }
-              
             }
           }
         },
@@ -1199,7 +723,7 @@
             "tags": [
               "Comment"
             ],
-            "summary": "delete querry by id",
+            "summary": "delete comment by id",
             "produces": [
               "application/json"
             ],
@@ -1215,28 +739,17 @@
             ],
             "responses": {
               "200": {
-                "description": "OK",
-                "schema": {
-                  "message": "the querry deleted successfully",
-                  "type": "object",
-              "required": [
-                "id"
-              ]
-             
-                }
+                "description": " deleted successfully"
+              },
+              "401": {
+                "description": "User Not Authorized"
+              },
+              "404": {
+                "description": "Article doesn't exist!"
               },
               "500": {
-                "description": "Internal Server Error",
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                    }
-                  }
+                "description": "Internal Server Error"
               }
-              
             }
           }
         },
@@ -1255,7 +768,7 @@
           { 
             "name": "portfolio",
             "in":"body",
-            "description":"New Blog",
+            "description":"New Portfolio",
             "required":true,
             "schema":{
               "type": "object",
@@ -1282,39 +795,16 @@
             ],
             "responses": {
               "200": {
-                "description": "OK",
-                "schema": {
-                  "type": "object",
-              "required": [
-                "name"
-              ],
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description":{
-                  "type":"string"
-                },
-                "author":{
-                  "type":"string"
-                },
-                "imageUrl":{
-                  "type":"string"
-                }
-              }
-                }
+                "description": "deleted successfully"
               },
-              
+              "401": {
+                "description": "User Not Authorized"
+              },
+              "404": {
+                "description": "Blog doesn't exist!"
+              },
               "500": {
-                "description": "Internal Server Error",
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                    }
-                  }
+                "description": "Internal Server Error"
               }
             }
           },
@@ -1324,45 +814,16 @@
             ],
             "in":"formData",
             "summary": "Fetch all the Project",
-            "description": "This is all Project",
+            "description": "This is all Projects",
             "produces": [
               "application/json"
             ],
             "responses": {
               "200": {
-                "description": "OK",
-                "schema": {
-                  "message": "the Projects fetched successfully",
-                  "type": "object",
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description":{
-                  "type":"string"
-                },
-                "author":{
-                  "type":"string"
-                },
-                "imageUrl":{
-                  "type":"string"
-                }
-              }
-                }
+                "description": "successfully"
               },
-              "500": {
-                "description": "Internal Server Error",
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                    }
-                  }
+             "500": {
+                "description": "Internal Server Error"
               }
             }
           }   
@@ -1389,41 +850,11 @@
           ],
           "responses": {
             "200": {
-              "description": "OK",
-              "schema": {
-                "message": "the Portfolio fetched successfully",
-                "type": "string",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "description":{
-                "type":"string"
-              },
-              "author":{
-                "type":"string"
-              },
-              "imageUrl":{
-                "type":"string"
-              }
-            }
-              }
+              "description": "successfully"
             },
-            "500": {
-              "description": "Internal Server Error",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  }
-                  }
-                }
+           "500": {
+              "description": "Internal Server Error"
             }
-            
           }
         }
       },
@@ -1479,41 +910,17 @@
           ],
           "responses": {
             "200": {
-              "description": "OK",
-              "schema": {
-                "message": "the Portfolio updated successfully",
-                "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "description":{
-                "type":"string"
-              },
-              "author":{
-                "type":"string"
-              },
-              "imageUrl":{
-                "type":"string"
-              }
-            }
-              }
+              "description": "successfully"
+            },
+            "401": {
+              "description": "User Not Authorized"
+            },
+            "404": {
+              "description": "Blog doesn't exist!"
             },
             "500": {
-              "description": "Internal Server Error",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  }
-                  }
-                }
+              "description": "Internal Server Error"
             }
-            
           }
         }
       },
@@ -1542,47 +949,24 @@
           ],
           "responses": {
             "200": {
-              "description": "OK",
-              "schema": {
-                "message": "the Portfolio updated successfully",
-                "type": "object",
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "description":{
-                "type":"string"
-              },
-              "author":{
-                "type":"string"
-              },
-              "imageUrl":{
-                "type":"string"
-              }
-            }
-              }
+              "description": " deleted successfully"
+            },
+            "401": {
+              "description": "User Not Authorized"
+            },
+            "404": {
+              "description": "Article doesn't exist!"
             },
             "500": {
-              "description": "Internal Server Error",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  }
-                  }
-                }
+              "description": "Internal Server Error"
             }
-            
           }
         }
       }
+    }
         
     }
-  }
+  
   
         
   
