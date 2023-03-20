@@ -10,9 +10,7 @@
       { "url": "https://clear-trousers-mite.cyclic.app" }
     ],
     "basePath": "/api/v1",
-    "schemes": [
-      "http"  
-    ],
+   
     "securityDefinitions":{
       "bearAuth": {
        "type": "apiKey",
