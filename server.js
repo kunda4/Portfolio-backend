@@ -71,6 +71,7 @@ import swaggerDefinition from './swagger.json' assert { type: "json" };
 const options = {
     swaggerDefinition,
     apis: ['../routes/*.js'], // Path to the API routes files
+   
 };
 const swaggerSpec = swaggerJSDoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));

@@ -5,7 +5,10 @@
       "description": "API description in Markdown.",
       "version": "1.0.0"
     },
-    "host": "localhost:4000",
+    "servers": [
+      { "url": "http://localhost:4000" },
+      { "url": "https://clear-trousers-mite.cyclic.app" }
+    ],
     "basePath": "/api/v1",
     "schemes": [
       "http"  
