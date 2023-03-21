@@ -10,10 +10,13 @@ class blogsController{
         const { name, author, description, imageUrl} = req.body;
         try {
             const newBlog = await Blog.create({name, description, author, imageUrl}) 
-            const status = 201;
-            const msg = "Blog created Successfully";
-            const data = newBlog;
-            successMsg(res, status, msg, data);
+            const data = newBlog; 
+            res.status(201).json({
+                ok: true,
+                message: "Blog created successfully",
+                data: data
+            
+            });
             
         } catch (error) {
            const errorMsg = error.message
